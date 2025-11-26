@@ -13,5 +13,12 @@ This repository contains my practice codes for learning C programming.
   - 自訂函數 (Functions)
   - 解決中文亂碼問題 (`chcp 65001`)
 
----
-*Created by wanyanjie1*
+### 2. Password Verification (密碼驗證機制)
+- **功能**: 設定一組預設密碼（6位數），使用者有 3 次輸入機會。利用字串比對判斷輸入是否正確，若失敗則扣除次數並提示剩餘機會，連續錯誤 3 次即終止程式。
+- **學習重點**:
+  - 字串處理函式庫 `<string.h>` 與 `strcmp` 的使用
+  - `while` 迴圈與計數器 (`chance`) 邏輯控制
+  - `scanf` 的輸入安全限制 (`%6s`) 以避免緩衝區溢位
+  - 模組化設計：將驗證邏輯獨立為 `check_password` 函數
+
+#### 📝 程式碼實作 (Code Implementation)
