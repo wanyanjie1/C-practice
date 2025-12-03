@@ -1,39 +1,68 @@
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
-int check_password(char correct[], char input[]);
+void toUpper(char s[]);
+int countAlpha(char s[]);
+int countDigit(char s[]);
+int countOther(char s[]);
 
-int main(void) {
-    char password[7] = "a1b2c3";
-    char input[7];
-    int chance = 3;
-
-    //輸入密碼
-    while (chance > 0) {
-        printf("請輸入 6 位密碼: ");
-        scanf("%6s", input);
-
-        //正確輸出正確,錯了次數-1
-        if (check_password(password, input)) {
-            printf("密碼正確！\n");
-            return 0;
-        } else {
-            chance--;
-            printf("密碼錯誤  剩餘次數: %d\n", chance);
-        }
-    }
-
-    printf("輸入三次錯誤，無法在輸入。\n");
-    return 0;
+int main(void){
+	char str[50];
+	printf("輸入一段字串:");
+	fgets(str, sizeof(str), stdin);
+	int en_num = countAlpha(str);    
+    int nu_num = countDigit(str);
+    int ot_num = countOther(str);
+	toUpper(str);
+	printf("轉成大寫後:%s\n",str);
+	printf("英文字母數量:%d\n",en_num);
+	printf("數字字元數量:%d\n",nu_num);
+	printf("其他字元數量:%d\n",ot_num);
+	
+	system("pause");
+	return 0;	
+}
+void toUpper(char s[]){
+	int i=0;
+	while(s[i]!='\0'){
+		if(s[i]>=97&&s[i]<=122){
+			s[i]=s[i]-32;
+		}
+		i++;
+	}
+}
+int countAlpha(char s[]){
+	int i=0;
+	int en_num=0;
+	while(s[i]!='\0'){
+		if((s[i]>=97&&s[i]<=122)||(s[i]>=65&&s[i]<=90)){
+			en_num++;
+		}
+		i++;
+	}
+	return en_num;
+}
+int countDigit(char s[]){
+	int i=0;
+	int nu_num=0;
+	while(s[i]!='\0'){
+		if(s[i]>=48&&s[i]<=57){
+			nu_num++;
+		}
+	i++;
+	}
+	return nu_num;
+}
+int countOther(char s[]){
+	int i=0;
+	int ot_num=0;
+	while(s[i]!='\0'){
+		if(!((s[i] >= 'a' && s[i] <= 'z') ||(s[i] >= 'A' && s[i] <= 'Z') ||(s[i] >= '0' && s[i] <= '9'))){
+			ot_num++;
+		}
+	i++;
+	}
+	return ot_num;
 }
 
-//判斷密碼是否正確,對的回傳1錯了回傳0
-int check_password(char correct[], char input[]) {
-    if (strcmp(correct, input) == 0){
-        return 1;
-    }
-    else{
-        return 0;
-    }
 
-}
